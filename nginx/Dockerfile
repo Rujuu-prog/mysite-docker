@@ -10,7 +10,7 @@ COPY ./frontend/ ./
 RUN npm install -g npm-check-updates && \
     ncu -u --target minor && \
     npm install && \
-    > npm audit fix --force && \
+    npm audit fix --force && \
     NODE_OPTIONS="--max-old-space-size=1024" npm run build
 
 # The second stage
