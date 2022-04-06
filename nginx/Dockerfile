@@ -7,7 +7,10 @@ COPY ./frontend/package.json ./
 COPY ./frontend/package-lock.json ./
 RUN npm ci --silent
 COPY ./frontend/ ./
-RUN NODE_OPTIONS="--max-old-space-size=1024" npm run build
+RUN npm install -g npm-check-updates && \
+    ncu -u --target minor && \
+    npm install && \
+    NODE_OPTIONS="--max-old-space-size=1024" npm run build
 
 # The second stage
 # Copy React static files and start nginx
